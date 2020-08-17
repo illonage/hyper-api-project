@@ -36,10 +36,6 @@ except:
 
 def main():
 
-        # Set logging level based on user input, or error by default
-        logging_level = getattr(logging, 'DEBUG')
-        logging.basicConfig(level='debug')
-
         # SIGN IN
         tableau_auth = TSC.PersonalAccessTokenAuth(token_name=TABLEAU_TOKEN_NAME,
                                                    personal_access_token=TABLEAU_TOKEN, site_id=TABLEAU_SITE_NAME)
