@@ -1,0 +1,38 @@
+{
+    "name": "Tableau Slackhooks",
+    "description": "This app allows you to create Webhooks for your Slack Workspace",
+    "keywords": [
+      "productivity",
+      "Slack",
+      "bot"
+    ],
+    "website": "https://github.com/orliesaurus/greetingslack",
+    "repository": "https://github.com/orliesaurus/greetingslack",
+    "env": {
+      "SLACK_TOKEN": {
+        "description": "Your Slack API Token",
+        "value": "1234-12314123123-123123123",
+        "required": "true"
+      },
+      "TABLEAU_TOKEN": {
+        "description": "Your Tableau Personal Access Token",
+        "value": "1234-12314123123-123123123",
+        "required": "true"
+      },
+      "TABLEAU_TOKEN_NAME": {
+        "description": "The name of your personal access token",
+        "value": "PAT Name",
+        "required": "true"
+      },
+      "TABLEAU_EVENT_NAME": {
+        "description": "The Tableau Event Name",
+        "value": "webhook-source-event-workbook-created",
+        "required": "true"
+      },
+      "TABLEAU_SITE_NAME": {
+        "description": "The name of your Tableau Site",
+        "value": "sitenamedev",
+        "required": "true"
+      }
+    }
+  }
