@@ -49,8 +49,6 @@ def main():
 
         with server.auth.sign_in_with_personal_access_token(tableau_auth):
 
-        # Create webhook if create flag is set (-create, -c)
-
                 new_webhook = TSC.WebhookItem()
                 new_webhook.name = "Webooks created from Heroku"
                 new_webhook.url = "https://webhook.site/c0958e0a-ad1d-493b-97bb-7344586684a5"
@@ -63,12 +61,6 @@ def main():
                 all_webhooks, pagination_item = server.webhooks.get()
                 print("\nThere are {} webhooks on site: ".format(pagination_item.total_available))
                 print([webhook.name for webhook in all_webhooks])
-
-                if all_webhooks:
-                        # Pick one webhook from the list and delete it
-                        sample_webhook = all_webhooks[0]
-                        # sample_webhook.delete()
-                        print("+++"+sample_webhook.name)
 
 if __name__ == '__main__':
         main()

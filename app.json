@@ -21,7 +21,7 @@
       },
       "TABLEAU_TOKEN_NAME": {
         "description": "The name of your personal access token",
-        "value": "PAT Name",
+        "value": "heroku",
         "required": "true"
       },
       "TABLEAU_EVENT_NAME": {
@@ -31,7 +31,7 @@
       },
       "TABLEAU_SITE_NAME": {
         "description": "The name of your Tableau Site",
-        "value": "sitenamedev",
+        "value": "betagigi",
         "required": "true"
       }
     }
