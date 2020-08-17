@@ -17,11 +17,7 @@ import requests
 import urllib
 import os
 import sys
-
-
-
-logging.basicConfig(level=logging.DEBUG,
-        stream=sys.stdout)
+import logging
 
 # Suppress InsecureRequestWarning
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
