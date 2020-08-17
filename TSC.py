@@ -17,46 +17,60 @@ import os.path
 import tableauserverclient as TSC
 
 
+import websocket
+import json
+import requests
+import urllib
+import os
+import sys
+import logging
+c
+
+
+logging.basicConfig(level=logging.DEBUG,
+        stream=sys.stdout)
+
+# Suppress InsecureRequestWarning
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
+try:
+        TOKEN = os.environ.get('SLACK_TOKEN')
+        TABLEAU_TOKEN = os.environ.get('TABLEAU_TOKEN')
+        TABLEAU_SITE_NAME = os.environ.get('TABLEAU_SITE_NAME')
+	    TABLEAU_TOKEN_NAME = os.environ.get('TABLEAU_TOKEN_NAME')
+        TABLEAU_EVENT_NAME = os.environ.get('TABLEAU_EVENT_NAME')
+        DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
+except:
+        MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
+        TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
+        UNFURL = 'FALSE'
+
+
 def main():
 
-    parser = argparse.ArgumentParser(description='Explore webhook functions supported by the Server API.')
-    parser.add_argument('--server', '-s', required=True, help='server address')
-    parser.add_argument('--username', '-u', required=True, help='username to sign into server')
-    parser.add_argument('--site', '-S', default=None)
-    parser.add_argument('-p', default=None, help='token')
-    parser.add_argument('--logging-level', '-l', choices=['debug', 'info', 'error'], default='error',
-                        help='desired logging level (set to error by default)')
-    parser.add_argument('--token-name', '-n', help='name of the personal access token used to sign into the server')
-
-    args = parser.parse_args()
-    if args.p is None:
-        personal_access_token = getpass.getpass("Password: ")
-    else:
-        personal_access_token = args.p
-
     # Set logging level based on user input, or error by default
-    logging_level = getattr(logging, args.logging_level.upper())
-    logging.basicConfig(level=logging_level)
+    logging_level = getattr(logging, DEBUG)
+    logging.basicConfig(level=debug)
 
     # SIGN IN
-    tableau_auth = TSC.TableauAuth(args.username, password, args.site)
-    print("Signing in to " + args.server + " [" + args.site + "] as " + args.username)
-    server = TSC.Server(args.server)
+    tableau_auth = TSC.PersonalAccessTokenAuth(token_name=TABLEAU_TOKEN_NAME,
+                                                   personal_access_token=TABLEAU_TOKEN, site_id=TABLEAU_SITE_NAME)
 
     # Set http options to disable verifying SSL
     server.add_http_options({'verify': False})
 
     server.use_server_version()
 
-    with server.auth.sign_in(tableau_auth):
+    with server.auth.sign_in_with_personal_access_token(tableau_auth):
 
         # Create webhook if create flag is set (-create, -c)
-        args.create:
 
         new_webhook = TSC.WebhookItem()
-        new_webhook.name = args.create
-        new_webhook.url = "https://ifttt.com/maker-url"
-        new_webhook.event = "datasource-created"
+        new_webhook.name = "Webooks created from Heroku"
+        new_webhook.url = "https://webhook.site/c0958e0a-ad1d-493b-97bb-7344586684a5"
+        new_webhook.event = TABLEAU_EVENT_NAME
         print(new_webhook)
         new_webhook = server.webhooks.create(new_webhook)
         print("Webhook created. ID: {}".format(new_webhook.id))
@@ -72,9 +86,6 @@ def main():
             # sample_webhook.delete()
             print("+++"+sample_webhook.name)
 
-            if (args.delete):
-                print("Deleting webhook " + sample_webhook.name)
-                server.webhooks.delete(sample_webhook.id)
 
 
 if __name__ == '__main__':
