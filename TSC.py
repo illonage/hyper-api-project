@@ -86,5 +86,5 @@ def main():
                 print([webhook.name for webhook in all_webhooks])
 
 if __name__ == '__main__':
-        Get_Host_name_IP()
+        get_Host_name_IP()
         main()
