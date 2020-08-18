@@ -33,6 +33,9 @@
         "description": "The name of your Tableau Site",
         "value": "betagigi",
         "required": "true"
+      },
+      "HEROKU_APP_NAME": {
+        "required": true
       }
     }
   }
