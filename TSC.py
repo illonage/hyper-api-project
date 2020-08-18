@@ -68,7 +68,7 @@ def main():
 
                 new_webhook = TSC.WebhookItem()
                 new_webhook.name = "Webooks created from Heroku"
-                new_webhook.url = "https://"+str(HEROKU_APP_NAME)+".herokuapp.com/"
+                new_webhook.url = "https://"+str(HEROKU_APP_NAME)+".herokuapp.com/webhook"
                 new_webhook.event = TABLEAU_EVENT_NAME
                 print(new_webhook)
                 new_webhook = server.webhooks.create(new_webhook)
