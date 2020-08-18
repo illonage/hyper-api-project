@@ -39,18 +39,6 @@ except:
         TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
 
 
-
-def get_Host_name_IP(): 
-    try: 
-        host_name = socket.gethostname() 
-        host_ip = socket.gethostbyname(host_name) 
-        host = socket.gethostbyaddr(host_ip)
-        print("Hostname :  ",host_name) 
-        print("IP : ",host_ip) 
-        print("Host : ",host) 
-    except: 
-        print("Unable to get Hostname and IP") 
-
 def main():
 
         # SIGN IN
@@ -80,5 +68,4 @@ def main():
                 print([webhook.name for webhook in all_webhooks])
 
 if __name__ == '__main__':
-        get_Host_name_IP()
         main()
