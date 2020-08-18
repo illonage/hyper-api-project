@@ -18,6 +18,8 @@ import urllib
 import os
 import sys
 import logging
+import socket 
+
 
 
 # Suppress InsecureRequestWarning
@@ -43,6 +45,15 @@ app = Flask(__name__)
 def respond():
     print(request.json);
     return Response(status=200)
+
+def get_Host_name_IP(): 
+    try: 
+        host_name = socket.gethostname() 
+        host_ip = socket.gethostbyname(host_name) 
+        print("Hostname :  ",host_name) 
+        print("IP : ",host_ip) 
+    except: 
+        print("Unable to get Hostname and IP") 
 
 def main():
 
@@ -73,4 +84,5 @@ def main():
                 print([webhook.name for webhook in all_webhooks])
 
 if __name__ == '__main__':
+        get_Host_name_IP()
         main()
