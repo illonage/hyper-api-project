@@ -9,3 +9,6 @@ def respond():
 def respond():
     print(request.json);
     return Response(status=200)
+
+if __name__ == '__main__':
+    app.run()
