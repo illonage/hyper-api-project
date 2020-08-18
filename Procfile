@@ -1,2 +1,2 @@
 worker: python TSC.py
-web: gunicorn app:TSC
+web: gunicorn app:apps
