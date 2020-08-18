@@ -48,7 +48,7 @@ def respond():
 
 def get_Host_name_IP(): 
     try: 
-        host_name = socket.gethostname() 
+        host_name = socket.getfqdn() 
         host_ip = socket.gethostbyname(host_name) 
         print("Hostname :  ",host_name) 
         print("IP : ",host_ip) 
