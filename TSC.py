@@ -20,7 +20,6 @@ import sys
 import logging
 
 
-
 # Suppress InsecureRequestWarning
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -36,6 +35,7 @@ try:
 except:
         MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
         TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -61,7 +61,7 @@ def main():
 
                 new_webhook = TSC.WebhookItem()
                 new_webhook.name = "Webooks created from Heroku"
-                new_webhook.url = "https://"+HEROKU_APP_NAME+".herokuapp.com/"
+                new_webhook.url = "https://"+str(HEROKU_APP_NAME)+".herokuapp.com/"
                 new_webhook.event = TABLEAU_EVENT_NAME
                 print(new_webhook)
                 new_webhook = server.webhooks.create(new_webhook)
