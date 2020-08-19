@@ -9,6 +9,8 @@ Once you have created a Slack app, copy and paste your webhook URL in a safe spa
 ### Sign up for the Tableau Developer Program, and get your free Developer Site
 Sign up for the Tableau Developer Program [here](!https://www.tableau.com/developer), and [get your free Developer Site](!https://www.tableau.com/developer/get-site)
 
+This app works only for Tableau Online Developer Site.
+
 ### Create your Personal Access Token
 Personal access tokens provide Tableau users the ability to create long-lived authentication tokens. Follow the instrucrion on the [Tableau Webiste](!https://help.tableau.com/current/server/en-us/security_personal_access_tokens.htm). You will need the Token name, and Token.
 
