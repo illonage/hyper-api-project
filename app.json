@@ -6,8 +6,9 @@
       "Slack",
       "bot"
     ],
-    "website": "https://github.com/orliesaurus/greetingslack",
-    "repository": "https://github.com/orliesaurus/greetingslack",
+    "logo": "https://raw.githubusercontent.com/illonage/hackathon-project-2020/master/webhooks.png",
+    "website": "https://github.com/illonage/hackathon-project-2020",
+    "repository": "https://github.com/illonage/hackathon-project-2020",
     "env": {
       "SLACK_WEBHOOKS_URL": {
         "description": "Your Slack Webhook URL",
