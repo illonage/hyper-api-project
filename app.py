@@ -11,7 +11,7 @@ def hello():
 @app.route('/webhook', methods=['POST'])
 def respond():
 	payload = request.get_json()
-	slack_payload = json.dumps({'text': payload})
+	slack_payload = json.dumps({'text': '{}'.format(payload)})
 	slack_url = os.environ.get('SLACK_WEBHOOKS_URL')
 
 	requests.post(slack_url, data=slack_payload)
