@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import re
+import tableauserverclient as TSC
 from flask import Flask, request
 app = Flask(__name__)
 
