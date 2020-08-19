@@ -1,3 +1,5 @@
+import requests
+import json
 from flask import Flask, request
 app = Flask(__name__)
 
@@ -7,8 +9,14 @@ def hello():
 
 @app.route('/webhook', methods=['POST'])
 def respond():
-    print(request.json)
-    return '', 200
+	payload = request.get_json()
+	slack_payload = json.dumps({'text': payload})
+	slack_url = 'https://hooks.slack.com/services/{}'.format(os.environ.get('SLACK_TOKEN'))
+
+	requests.post(slack_url, data=slack_payload)
+
+	return '', 200
+
 
 if __name__ == '__main__':
     app.run()
