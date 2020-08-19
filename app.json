@@ -9,8 +9,8 @@
     "website": "https://github.com/orliesaurus/greetingslack",
     "repository": "https://github.com/orliesaurus/greetingslack",
     "env": {
-      "SLACK_TOKEN": {
-        "description": "Your Slack API Token",
+      "SLACK_WEBHOOKS_URL": {
+        "description": "Your Slack Webhook URL",
         "value": "1234-12314123123-123123123",
         "required": "true"
       },

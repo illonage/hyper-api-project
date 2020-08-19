@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from flask import Flask, request
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def hello():
 def respond():
 	payload = request.get_json()
 	slack_payload = json.dumps({'text': payload})
-	slack_url = 'https://hooks.slack.com/services/{}'.format(os.environ.get('SLACK_TOKEN'))
+	slack_url = os.environ.get('SLACK_WEBHOOKS_URL')
 
 	requests.post(slack_url, data=slack_payload)
 
