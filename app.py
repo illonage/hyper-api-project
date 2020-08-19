@@ -25,7 +25,7 @@ def hello():
 			html += "There are "+str(n)+" webhooks on your site:"+"\n"
             for webhook in all_webhooks:
 				html += "<li>"+str(webhoook.name)+"</li>"+"\n"
-
+			print html
     return html
 
 @app.route('/webhook', methods=['POST'])
