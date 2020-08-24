@@ -1,2 +1,2 @@
-release: python TSC.py
-web: gunicorn --bind 0.0.0.0:$PORT app:app
+release: python initialize.py
+web: gunicorn app:app
