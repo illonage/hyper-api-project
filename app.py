@@ -19,6 +19,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 def create():
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         print("The HyperProcess has started.")
+        print(hyper.endpoint)
 
     with Connection(hyper.endpoint, 'TrivialExample.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
         print("The connection to the Hyper file is open.")
