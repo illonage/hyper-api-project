@@ -1,8 +1,7 @@
 from tableauhyperapi import Connection, HyperProcess, SqlType, TableDefinition, \
     escape_string_literal, escape_name, NOT_NULLABLE, Telemetry, Inserter, CreateMode, TableName
 
-if __name__ == "__main__":
-	with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
+with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
     print("The HyperProcess has started.")
 
     with Connection(hyper.endpoint, 'TrivialExample.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
@@ -23,3 +22,5 @@ if __name__ == "__main__":
         print("The data was added to the table.")
     print("The connection to the Hyper extract file is closed.")
 print("The HyperProcess has shut down.")
+
+
