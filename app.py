@@ -3,6 +3,7 @@ import json
 import os
 import re
 import sys
+import boto3
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from tableauhyperapi import Connection, HyperProcess, SqlType, TableDefinition, \
@@ -22,6 +23,7 @@ def index():
 def create():
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         print("The HyperProcess has started.")
+        s3_client = boto3.client('s3')
 
         with Connection(hyper.endpoint, 'TrivialExample.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
             print("The connection to the Hyper file is open.")
@@ -39,6 +41,11 @@ def create():
                 )
                 inserter.execute()
                 print("The data was added to the table.")
+                try:
+                    response = s3_client.upload_file('TrivialExample.hyper', 'hyperapi')
+                except ClientError as e:
+                    logging.error(e)
+                    return False
             print("The connection to the Hyper extract file is closed.")
         print("The HyperProcess has shut down.")
     return redirect(url_for('index'))
