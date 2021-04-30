@@ -5,45 +5,6 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
-	<div>
-		{% for mesg in get_flashed_messages() %}
-	  		<h3 id="flash">{{ mesg }}</h3>
-	  	{% endfor %}
-  	</div>
-	<div>
-		<h1>Welcome to your own Tableau Slackhooks</h1>
-		<p>There are {{ webhooks|length }} webhooks on your site:
-		    <ol>
-		    {% for webhook in webhooks %}
-		        <li class="webhook">{{ webhook }}</li>
-		    {% endfor %}
-		    </ol>
-		</p>
-	</div>
-	<div>
-		<h3>Delete a webhook</h3>
-		<form action="/delete" method="post">
-			<label for="event-type">Event type:</label><br>
-			<select name="webhook-id">
-				{% for webhook in webhooks %}
-					<option value="{{ webhook.id }}">{{ webhook.event }}</option>
-				{% endfor %}
-			</select><br>
-			<label for="token">Personal Access Token:</label><br>
-			<input type="text" id="token" name="token">
-			<input type="submit" value="Delete">
-		</form>
-	</div>
-	<br>
-	<div>
-		<h3>Create another webhook</h3>
-		<form action="/create" method="post">
-			<label for="event-type">Event type:</label><br>
-			<input type="text" id="event-type" name="event-type"><br>
-			<label for="token">Personal Access Token:</label><br>
-			<input type="text" id="token" name="token">
-			<input type="submit" value="Create">
-		</form>
-	</div>
+	HELLO
 </body>
 </html>
