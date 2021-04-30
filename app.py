@@ -3,8 +3,12 @@ import json
 import os
 import re
 import sys
-import boto3
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import boto3
+import logging
+from botocore.exceptions import ClientError
+
+
 
 from tableauhyperapi import Connection, HyperProcess, SqlType, TableDefinition, \
     escape_string_literal, escape_name, NOT_NULLABLE, Telemetry, Inserter, CreateMode, TableName
@@ -23,7 +27,7 @@ def index():
 def create():
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         print("The HyperProcess has started.")
-        s3_client = boto3.client('s3')
+        
 
         with Connection(hyper.endpoint, 'TrivialExample.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
             print("The connection to the Hyper file is open.")
@@ -41,8 +45,11 @@ def create():
                 )
                 inserter.execute()
                 print("The data was added to the table.")
+                if object_name is None:
+                    object_name = file_name
+                s3_client = boto3.client('s3')
                 try:
-                    response = s3_client.upload_file('TrivialExample.hyper', 'hyperapi')
+                    response = s3_client.upload_file('TrivialExample.hyper', 'hyperapi',object_name)
                 except ClientError as e:
                     logging.error(e)
                     return False
