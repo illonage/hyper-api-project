@@ -1,1 +1,12 @@
+backports.ssl-match-hostname==3.4.0.2
+requests==2.20.0
+six==1.9.0
+websocket-client==0.29.0
 tableauhyperapi
+Click==7.0
+Flask==1.1.1
+gunicorn==19.9.0
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+Werkzeug==0.15.6
