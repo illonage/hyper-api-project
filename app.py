@@ -25,6 +25,10 @@ def index():
 
 @app.route('/create', methods=['POST'])
 def create():
+    s3 = boto3.resource('s3',
+         aws_access_key_id=os.environ.get('aws_access_key_id'),
+         aws_secret_access_key= os.environ.get('aws_secret_access_key')
+
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         print("The HyperProcess has started.")
         object_name=None
