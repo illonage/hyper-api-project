@@ -14,6 +14,9 @@ app.secret_key = os.urandom(24)
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 @app.route('/create', methods=['POST'])
 def create():
