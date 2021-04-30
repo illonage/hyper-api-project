@@ -48,14 +48,12 @@ def create():
                 )
                 inserter.execute()
                 print("The data was added to the table.")
-                s3 = boto3.resource('s3',
-                    aws_access_key_id=os.environ.get('aws_access_key_id'), 
-                    aws_secret_access_key= os.environ.get('aws_secret_access_key'))
                 if object_name is None:
                     object_name = file_name
-                s3_client = boto3.client('s3')
+                s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
+                            aws_secret_access_key= os.environ.get('aws_secret_access_key'))
                 try:
-                    response = s3_client.upload_file('TrivialExample.hyper', 'hyperapi',object_name)
+                    response = s3_client.upload_file('TrivialExample.hyper','hyperapi',object_name)
                 except ClientError as e:
                     logging.error(e)
                     return False
