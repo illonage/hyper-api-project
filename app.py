@@ -24,9 +24,9 @@ def index():
 
 @app.route('/create', methods=['POST'])
 def create():
-    request_data = request.get_json()
-    print(request_data)
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
+        request_data = request.get_json()
+        print(request_data)
         print("The HyperProcess has started.")
         object_name=None
         file_name='TrivialExample.hyper'
@@ -35,7 +35,7 @@ def create():
             print("The connection to the Hyper file is open.")
             connection.catalog.create_schema('Extract')
             example_table = TableDefinition(TableName('Extract','Extract'), [
-                TableDefinition.Column('rowID', SqlType.big_int()),
+                TableDefinition.Column('Breakfast', SqlType.big_int()),
                 TableDefinition.Column('value', SqlType.big_int()),
             ])
             print("The table is defined.")
