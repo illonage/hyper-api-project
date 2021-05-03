@@ -9,7 +9,6 @@ import logging
 from botocore.exceptions import ClientError
 
 
-
 from tableauhyperapi import Connection, HyperProcess, SqlType, TableDefinition, \
     escape_string_literal, escape_name, NOT_NULLABLE, Telemetry, Inserter, CreateMode, TableName
 from flask import Flask, request, render_template, redirect, url_for, flash
@@ -25,7 +24,7 @@ def index():
 
 @app.route('/create', methods=['POST'])
 def create():
-    
+    request_data = request.get_json()
 
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         print("The HyperProcess has started.")
