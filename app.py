@@ -25,7 +25,7 @@ def index():
 @app.route('/create', methods=['POST'])
 def create():
     request_data = request.get_json()
-
+    print(request_data)
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         print("The HyperProcess has started.")
         object_name=None
