@@ -28,7 +28,7 @@ def create():
         request_data = request.get_json()
         print(request_data)
         print("The HyperProcess has started.")
-        object_name=None
+        object_name="mealprep.hyper"
         file_name=os.environ.get('bucket_name')
 
         with Connection(hyper.endpoint, 'mealprep.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
@@ -44,7 +44,7 @@ def create():
             with Inserter(connection, example_table) as inserter:
                 for i in request_data['data']:
                     inserter.add_row(
-                        [ i['Breakfast'], i['Lunch'], i['Dinner'] ]
+                        [ i['breakfast'], i['lunch'], i['dinner'] ]
                     )
 
                 inserter.execute()
@@ -54,7 +54,7 @@ def create():
                 s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
                             aws_secret_access_key= os.environ.get('aws_secret_access_key'))
                 try:
-                    response = s3_client.upload_file('mealprep.hyper',file_name,object_name)
+                    response = s3_client.upload_file('mealprep.hyper',file_name, object_name)
                 except ClientError as e:
                     logging.error(e)
                     return False

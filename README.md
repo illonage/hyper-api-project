@@ -33,7 +33,9 @@ Although you have a lot of freedom in choosing a bucket name, take care in choos
 ### Sending your first POST Request
 
 You can [download Postman](https://www.postman.com/downloads/) for free to quickly get started. 
-Your endpoint should be: https://NameOfHerokyApp.herokuapp.com/create
+
+Your endpoint is: https://NameOfHerokyApp.herokuapp.com/create
+
 The body of you request:
 ```json
 {
