@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import boto3
 import logging
 from botocore.exceptions import ClientError
+from pathlib import Path
 
 
 from tableauhyperapi import Connection, HyperProcess, SqlType, TableDefinition, \
