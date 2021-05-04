@@ -36,7 +36,7 @@ def create():
         object_name="mealprep.hyper"
         file_name=os.environ.get('bucket_name')
 
-        with Connection(endpoint=hyper.endpoint, database=path_to_database, reate_mode=CreateMode.CREATE_AND_REPLACE) as connection:
+        with Connection(endpoint=hyper.endpoint, database=path_to_database, create_mode=CreateMode.CREATE_AND_REPLACE) as connection:
             print("The connection to the Hyper file is open.")
             connection.catalog.create_schema('Extract')
             example_table = TableDefinition(TableName('Extract','Extract'), [
