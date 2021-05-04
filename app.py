@@ -58,8 +58,9 @@ def create():
                     object_name = file_name
                 s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
                             aws_secret_access_key= os.environ.get('aws_secret_access_key'))
+                print(path_to_database)
                 try:
-                    response = s3_client.upload_file(path_to_database,file_name, object_name)
+                    s3.meta.client.upload_file(path_to_database, file_name, 'hyper.hyper')
                 except ClientError as e:
                     logging.error(e)
                     return False
