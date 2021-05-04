@@ -61,18 +61,18 @@ def create():
             print("The connection to the Hyper extract file is closed.")
         print("The HyperProcess has shut down.")
         file = open('mealprep.hyper')
+        try:
+            if object_name is None:
+                object_name = file_name
+            s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
+                        aws_secret_access_key= os.environ.get('aws_secret_access_key'))
             try:
-                if object_name is None:
-                    object_name = file_name
-                s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
-                            aws_secret_access_key= os.environ.get('aws_secret_access_key'))
-                try:
-                    response = s3_client.upload_fileobj(file,file_name, object_name)
-                except ClientError as e:
-                    logging.error(e)
-                    return False
-            finally:
-                file.close()
+                response = s3_client.upload_fileobj(file,file_name, object_name)
+            except ClientError as e:
+                logging.error(e)
+                return False
+        finally:
+            file.close()
 
     return redirect(url_for('index'))
 
