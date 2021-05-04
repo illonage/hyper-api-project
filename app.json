@@ -1,6 +1,6 @@
 {
     "name": "Tableau Hyper API app",
-    "description": "This app allows you to create a hyper file",
+    "description": "This app allows you to create a Hyper file from a POST request that is going to get published to your S3 bucket",
     "keywords": [
       "productivity",
       "Hyper",
@@ -8,5 +8,22 @@
     ],
     "logo": "https://raw.githubusercontent.com/illonage/hackathon-project-2020/master/webhooks.png",
     "website": "https://github.com/illonage/hyper-api-project",
-    "repository": "https://github.com/illonage/hyper-api-project"
+    "repository": "https://github.com/illonage/hyper-api-project",
+    "env": {
+      "aws_access_key_id": {
+        "description": "Specifies an AWS access key associated with an IAM user or role.",
+        "value": "AKIAIOSFODNN7EXAMPLE",
+        "required": "true"
+      },
+      "aws_secret_access_key": {
+        "description": "Specifies the secret key associated with the access key. This is essentially the password for the access key.",
+        "value": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+        "required": "true"
+      },
+      "bucket_name": {
+        "description": "Specifies the secret key associated with the access key. This is essentially the password for the access key.",
+        "value": "hyperapi",
+        "required": "true"
+      }
+    }
 }

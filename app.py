@@ -29,22 +29,24 @@ def create():
         print(request_data)
         print("The HyperProcess has started.")
         object_name=None
-        file_name='TrivialExample.hyper'
+        file_name=os.environ.get('bucket_name')
 
-        with Connection(hyper.endpoint, 'TrivialExample.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
+        with Connection(hyper.endpoint, 'mealprep.hyper', CreateMode.CREATE_AND_REPLACE) as connection:
             print("The connection to the Hyper file is open.")
             connection.catalog.create_schema('Extract')
             example_table = TableDefinition(TableName('Extract','Extract'), [
-                TableDefinition.Column('Breakfast', SqlType.big_int()),
-                TableDefinition.Column('value', SqlType.big_int()),
+                TableDefinition.Column('Breakfast', SqlType.text()),
+                TableDefinition.Column('Lunch', SqlType.text()),
+                TableDefinition.Column('Dinner', SqlType.text()),
             ])
             print("The table is defined.")
             connection.catalog.create_table(example_table)
             with Inserter(connection, example_table) as inserter:
-                for i in range (1, 101):
+                for i in request_data['data']:
                     inserter.add_row(
-                        [ i, i ]
-                )
+                        [ i['Breakfast'], i['Lunch'], i['Dinner'] ]
+                    )
+
                 inserter.execute()
                 print("The data was added to the table.")
                 if object_name is None:
@@ -52,7 +54,7 @@ def create():
                 s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
                             aws_secret_access_key= os.environ.get('aws_secret_access_key'))
                 try:
-                    response = s3_client.upload_file('TrivialExample.hyper','hyperapi',object_name)
+                    response = s3_client.upload_file('mealprep.hyper',file_name,object_name)
                 except ClientError as e:
                     logging.error(e)
                     return False
