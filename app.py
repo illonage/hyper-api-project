@@ -46,8 +46,8 @@ def create():
             ])
             print("The table is defined.")
             connection.catalog.create_table(example_table)
-            console.log(example_table)
-            console.log(type(example_table))
+            print(example_table)
+            print(type(example_table))
             with Inserter(connection, example_table) as inserter:
                 for i in request_data['data']:
                     inserter.add_row(
