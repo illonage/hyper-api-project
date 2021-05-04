@@ -58,6 +58,7 @@ def create():
                     object_name = file_name
                 s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
                             aws_secret_access_key= os.environ.get('aws_secret_access_key'))
+                s3 = boto3.resource('s3')
                 print(path_to_database)
                 try:
                     s3.meta.client.upload_file(path_to_database, file_name, 'hyper.hyper')
