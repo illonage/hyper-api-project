@@ -61,7 +61,7 @@ def create():
                 s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
                             aws_secret_access_key= os.environ.get('aws_secret_access_key'))
                 try:
-                    response = s3_client.upload_fileobj(example_table,file_name, object_name)
+                    response = s3_client.upload_fileobj(path_to_database,file_name, object_name)
                 except ClientError as e:
                     logging.error(e)
                     return False
