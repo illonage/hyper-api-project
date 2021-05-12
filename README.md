@@ -28,7 +28,7 @@ Although you have a lot of freedom in choosing a bucket name, take care in choos
 
 
 ### Deploy on Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/illonage/hyper-api-project/tree/master)
 
 ### Sending your first POST Request
 
