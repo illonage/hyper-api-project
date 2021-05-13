@@ -58,7 +58,7 @@ def create():
                 for i in request_data:
                     print(i)
                     inserter.add_row(
-                        [ i['activityId'], i['activityType'], i['contactId'], i['industry'], i['contactId'], i['accountId'], i['accountName'], i['activityDate'], i['measureNames'], i['measureValues'] ]
+                        [ i['activityId'], i['activityType'], i['contactId'], i['industry'], i['accountId'], i['accountName'], i['activityDate'], i['measureNames'], i['measureValues'] ]
                     )
 
                 inserter.execute()
