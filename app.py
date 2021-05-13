@@ -46,7 +46,7 @@ def create():
                 TableDefinition.Column('industry', SqlType.text()),
                 TableDefinition.Column('accountId', SqlType.text()),
                 TableDefinition.Column('accountName', SqlType.text()),
-                TableDefinition.Column('activityDate', SqlType.date()),
+                TableDefinition.Column('activityDate', SqlType.Timestamp()),
                 TableDefinition.Column('measureNames', SqlType.text()),
                 TableDefinition.Column('measureValues', SqlType.int()),
             ])
