@@ -19,7 +19,7 @@ app.secret_key = os.urandom(24)
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-hyper_name = 'mealprep.hyper'
+hyper_name = 'tdxdemo_test.hyper'
 
 path_to_database = Path(hyper_name)
 
@@ -33,25 +33,32 @@ def create():
         request_data = request.get_json()
         print(request_data)
         print("The HyperProcess has started.")
-        object_name="mealprep.hyper"
+        object_name="tdxdemo_test.hyper"
         file_name=os.environ.get('bucket_name')
 
         with Connection(endpoint=hyper.endpoint, database=path_to_database, create_mode=CreateMode.CREATE_AND_REPLACE) as connection:
             print("The connection to the Hyper file is open.")
             connection.catalog.create_schema('Extract')
             example_table = TableDefinition(TableName('Extract','Extract'), [
-                TableDefinition.Column('Breakfast', SqlType.text()),
-                TableDefinition.Column('Lunch', SqlType.text()),
-                TableDefinition.Column('Dinner', SqlType.text()),
+                TableDefinition.Column('activityId', SqlType.big_int()),
+                TableDefinition.Column('activityType', SqlType.text()),
+                TableDefinition.Column('contactId', SqlType.big_int()),
+                TableDefinition.Column('industry', SqlType.text()),
+                TableDefinition.Column('accountId', SqlType.text()),
+                TableDefinition.Column('accountName', SqlType.text()),
+                TableDefinition.Column('activityDate', SqlType.date()),
+                TableDefinition.Column('measureNames', SqlType.text()),
+                TableDefinition.Column('measureValues', SqlType.int()),
             ])
             print("The table is defined.")
             connection.catalog.create_table(example_table)
             print(example_table)
             print(type(example_table))
             with Inserter(connection, example_table) as inserter:
-                for i in request_data['data']:
+                for i in request_data:
+                    print(i)
                     inserter.add_row(
-                        [ i['breakfast'], i['lunch'], i['dinner'] ]
+                        [ i['activityId'], i['activityType'], i['contactId'], i['industry'], i['contactId'], i['accountId'], i['accountName'], i['activityDate'], i['measureNames'], i['measureValues'] ]
                     )
 
                 inserter.execute()
@@ -61,7 +68,7 @@ def create():
             print("The connection to the Hyper extract file is closed.")
         print("The HyperProcess has shut down.")
         
-        with open('mealprep.hyper','rb') as reader:
+        with open('tdxdemo_test.hyper','rb') as reader:
             if object_name is None:
                 object_name = file_name
             s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
