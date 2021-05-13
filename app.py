@@ -19,7 +19,7 @@ app.secret_key = os.urandom(24)
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-hyper_name = 'tdxdemo_test.hyper'
+hyper_name = 'tdxdemo.hyper'
 
 path_to_database = Path(hyper_name)
 
@@ -33,7 +33,7 @@ def create():
         request_data = request.get_json()
         print(request_data)
         print("The HyperProcess has started.")
-        object_name="tdxdemo_test.hyper"
+        object_name="tdxdemo.hyper"
         file_name=os.environ.get('bucket_name')
 
         with Connection(endpoint=hyper.endpoint, database=path_to_database, create_mode=CreateMode.CREATE_AND_REPLACE) as connection:
@@ -68,7 +68,7 @@ def create():
             print("The connection to the Hyper extract file is closed.")
         print("The HyperProcess has shut down.")
         
-        with open('tdxdemo_test.hyper','rb') as reader:
+        with open('tdxdemo.hyper','rb') as reader:
             if object_name is None:
                 object_name = file_name
             s3_client = boto3.client('s3', aws_access_key_id=os.environ.get('aws_access_key_id'), 
