@@ -31,7 +31,6 @@ def index():
 def create():
     with HyperProcess(Telemetry.SEND_USAGE_DATA_TO_TABLEAU) as hyper:
         request_data = request.get_json()
-        print(request_data)
         print("The HyperProcess has started.")
         object_name="tdxdemo.hyper"
         file_name=os.environ.get('bucket_name')
@@ -52,8 +51,6 @@ def create():
             ])
             print("The table is defined.")
             connection.catalog.create_table(example_table)
-            print(example_table)
-            print(type(example_table))
             with Inserter(connection, example_table) as inserter:
                 for i in request_data:
                     inserter.add_row(
