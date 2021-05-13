@@ -56,7 +56,6 @@ def create():
             print(type(example_table))
             with Inserter(connection, example_table) as inserter:
                 for i in request_data:
-                    print(i)
                     inserter.add_row(
                         [ i['activityId'], i['activityType'], i['contactId'], i['industry'], i['accountId'], i['accountName'], i['activityDate'], i['measureNames'], i['measureValues'] ]
                     )
