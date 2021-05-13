@@ -35,6 +35,7 @@ def create():
         object_name="tdxdemo.hyper"
         file_name=os.environ.get('bucket_name')
 
+
         with Connection(endpoint=hyper.endpoint, database=path_to_database, create_mode=CreateMode.CREATE_AND_REPLACE) as connection:
             print("The connection to the Hyper file is open.")
             connection.catalog.create_schema('Extract')
@@ -46,15 +47,21 @@ def create():
                 TableDefinition.Column('accountId', SqlType.text()),
                 TableDefinition.Column('accountName', SqlType.text()),
                 TableDefinition.Column('activityDate', SqlType.text()),
-                TableDefinition.Column('measureNames', SqlType.text()),
-                TableDefinition.Column('measureValues', SqlType.int()),
+                TableDefinition.Column('company', SqlType.text()),
+                TableDefinition.Column('name', SqlType.text()),
+                TableDefinition.Column('activitiesTotal', SqlType.big_int()),
+                TableDefinition.Column('activitiesPerContact', SqlType.big_int()),
+                TableDefinition.Column('contactsTotal', SqlType.big_int()),
+                TableDefinition.Column('totalFormsSubmitted', SqlType.big_int()),
+                TableDefinition.Column('totalPageViews', SqlType.big_int()),
+                TableDefinition.Column('totalWebVisits', SqlType.big_int()),
             ])
             print("The table is defined.")
             connection.catalog.create_table(example_table)
             with Inserter(connection, example_table) as inserter:
                 for i in request_data:
                     inserter.add_row(
-                        [ i['activityId'], i['activityType'], i['contactId'], i['industry'], i['accountId'], i['accountName'], i['activityDate'], i['measureNames'], i['measureValues'] ]
+                        [ i['activityId'], i['activityType'], i['contactId'], i['industry'], i['accountId'], i['accountName'], i['activityDate'], i['company'], i['name'], i['activitiesTotal'], i['activitiesPerContact'], i['contactsTotal'], i['totalFormsSubmitted'], i['totalPageViews'], i['totalWebVisits'] ]
                     )
 
                 inserter.execute()
